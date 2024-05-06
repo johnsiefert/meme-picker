@@ -1,4 +1,4 @@
-import { catsData } from "./data.js"
+import { catsData } from './data.js';
 
 const emotionRadios = document.querySelector('#emotion-radios');
 
@@ -17,7 +17,18 @@ function renderEmotionsRadios(cats) {
   let radioItems = '';
 
   for (let emotion of emotions) {
-    radioItems += `<p> ${emotion} </p>`;
+    radioItems += `
+<div class="radio">
+
+<label for="${emotion}"> ${emotion} </label>
+
+<input
+type = "radio"
+id = "${emotion}"
+value = "${emotion}"
+name = "emotions"
+/>
+</div>`;
   }
   emotionRadios.innerHTML = radioItems;
 }
