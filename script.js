@@ -3,8 +3,8 @@ import { catsData } from './data.js';
 const emotionRadios = document.querySelector('#emotion-radios');
 
 
-function emotionRadiosButtons (e){
-    console.log(e.target.value)
+function emotionRadiosButtons(e){
+document.getElementById(e.target.id).parentElement.classList.add('highlight');
 }
 
 function getEmotionsArray(cats) {
