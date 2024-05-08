@@ -2,11 +2,18 @@ import { catsData } from './data.js';
 
 const emotionRadios = document.querySelector('#emotion-radios');
 
+
+function emotionRadiosButtons (e){
+    console.log(e.target.value)
+}
+
 function getEmotionsArray(cats) {
   let catEmotionArray = [];
   for (let cat of cats) {
     for (let emotion of cat.emotionTags) {
-      catEmotionArray.push(emotion);
+      if (!catEmotionArray.includes(emotion)) {
+        catEmotionArray.push(emotion);
+      }
     }
   }
   return catEmotionArray;
@@ -33,3 +40,6 @@ name = "emotions"
   emotionRadios.innerHTML = radioItems;
 }
 renderEmotionsRadios(catsData);
+
+
+emotionRadios.addEventListener("change",emotionRadiosButtons)
