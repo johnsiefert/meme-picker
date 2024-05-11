@@ -3,6 +3,8 @@ import { catsData } from './data.js';
 const emotionRadios = document.querySelector('#emotion-radios');
 const imageBtn = document.querySelector('#get-image-btn');
 const gifsOnly = document.querySelector('#gifs-only-option');
+const memeModalInner = document.getElementById('meme-modal-inner');
+const memeModal = document.getElementById('meme-modal');
 
 function emotionRadiosButtons(e) {
   const radios = document.getElementsByClassName('radio');
@@ -34,21 +36,29 @@ function getMatchingCatsArray() {
 
 //returns a single cat object selected from the array provided by getMatchingCatsArray
 function getSingleCatObject() {
-const catsArray = getMatchingCatsArray()
+  const catsArray = getMatchingCatsArray();
 
-if(catsArray.length === 1) {
-    console.log(catsArray[0])
-} else {
-    const randomNumber = Math.floor(Math.random() * catsArray.length)
-    console.log(catsArray[randomNumber])
-}
-
-
+  if (catsArray.length === 1) {
+    return catsArray[0];
+  } else {
+    const randomNumber = Math.floor(Math.random() * catsArray.length);
+    return catsArray[randomNumber];
+  }
 }
 
 //the cat object provided by getSingleCatObject to create HTML string which will render it to DOM
 function renderCat() {
-    getSingleCatObject()
+  const catObject = getSingleCatObject();
+
+  memeModalInner.innerHTML = `
+<img
+        class="cat-img"
+        src="./images/${catObject.image}"
+        alt="${catObject.alt}"
+        >
+  `;
+
+  memeModal.style.display = 'flex';
 }
 
 function getEmotionsArray(cats) {
