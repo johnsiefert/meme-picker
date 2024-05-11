@@ -3,8 +3,13 @@ import { catsData } from './data.js';
 const emotionRadios = document.querySelector('#emotion-radios');
 const imageBtn = document.querySelector('#get-image-btn');
 const gifsOnly = document.querySelector('#gifs-only-option');
-const memeModalInner = document.getElementById('meme-modal-inner');
-const memeModal = document.getElementById('meme-modal');
+const memeModalInner = document.querySelector('#meme-modal-inner');
+const memeModal = document.querySelector('#meme-modal');
+const memeCloseBtn = document.querySelector('#meme-modal-close-btn');
+
+function memeClose() {
+  memeModal.style.display = 'none';
+}
 
 function emotionRadiosButtons(e) {
   const radios = document.getElementsByClassName('radio');
@@ -97,3 +102,4 @@ renderEmotionsRadios(catsData);
 
 emotionRadios.addEventListener('change', emotionRadiosButtons);
 imageBtn.addEventListener('click', renderCat);
+memeCloseBtn.addEventListener('click', memeClose);
