@@ -2,7 +2,7 @@ import { catsData } from './data.js';
 
 const emotionRadios = document.querySelector('#emotion-radios');
 const imageBtn = document.querySelector('#get-image-btn');
-const gifsOnly = document.querySelector("#gifs-only-option")
+const gifsOnly = document.querySelector('#gifs-only-option');
 
 function emotionRadiosButtons(e) {
   const radios = document.getElementsByClassName('radio');
@@ -13,19 +13,35 @@ function emotionRadiosButtons(e) {
   document.getElementById(e.target.id).parentElement.classList.add('highlight');
 }
 
-function getMatchingCatsArray(){
+//returns an array of cat objects that matches the user criteria
+function getMatchingCatsArray() {
+  if (document.querySelector('input[type="radio"]:checked')) {
+    const selectedEmotion = document.querySelector(
+      'input[type="radio"]:checked'
+    ).value;
+    const isGif = gifsOnly.checked;
 
-if (document.querySelector('input[type="radio"]:checked')) {
-  const selectedEmotion = document.querySelector('input[type="radio"]:checked').value;
-  const isGif = gifsOnly.checked;
+    const matchingCats = catsData.filter(function (cat) {
+      if (isGif) {
+        return cat.emotionTags.includes(selectedEmotion) && cat.isGif;
+      } else {
+        return cat.emotionTags.includes(selectedEmotion);
+      }
+    });
+    return matchingCats;
+  }
+}
 
-  const matchingCats =  catsData.filter(function(cat){
-        return cat.emotionTags.includes(selectedEmotion)
-  })
-console.log(matchingCats)
+//returns a single cat object selected from the array provided by getMatchingCatsArray
+function getSingleCatObject() {
+const catsArray = getMatchingCatsArray()
+
 
 }
 
+//the cat object provided by getSingleCatObject to create HTML string which will render it to DOM
+function renderCat() {
+    getSingleCatObject()
 }
 
 function getEmotionsArray(cats) {
@@ -63,5 +79,4 @@ name = "emotions"
 renderEmotionsRadios(catsData);
 
 emotionRadios.addEventListener('change', emotionRadiosButtons);
-imageBtn.addEventListener('click', getMatchingCatsArray);
-
+imageBtn.addEventListener('click', renderCat);
